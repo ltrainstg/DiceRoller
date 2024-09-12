@@ -1,9 +1,9 @@
 {
-    "name": "DiceRoller",
+    "name": "diceroller",
     "version": "1.0.0",
     "manifest_version": 1,
     "action": {
-      "title": "DiceRoller",
+      "title": "diceroller",
       "icon": "/icon.svg",
       "popover": "/",
       "height": 600,
