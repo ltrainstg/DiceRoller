@@ -7,23 +7,23 @@ document.querySelector('#app').innerHTML = `
   <div>
     <div class="card">
       <button id="counter1" type="button"></button>
-      <input id="input1" type="number" placeholder="00" maxlength="2" />
+      <input id="input1" type="number" placeholder=0 />
     </div>
     <div class="card">
       <button id="counter2" type="button"></button>
-      <input id="input2" type="number" placeholder="00" maxlength="2" />
+      <input id="input2" type="number" placeholder=0 />
     </div>
     <div class="card">
       <button id="counter3" type="button"></button>
-      <input id="input3" type="number" placeholder="00" maxlength="2" />
+      <input id="input3" type="number" placeholder=0 />
     </div>
     <div class="card">
       <button id="counter4" type="button"></button>
-      <input id="input4" type="number" placeholder="00" maxlength="2" />
+      <input id="input4" type="number" placeholder=0 />
     </div>
     <div class="card">
       <button id="counter5" type="button"></button>
-      <input id="input5" type="number" placeholder="00" maxlength="2" />
+      <input id="input5" type="number" placeholder=0 />
     </div>
   </div>
 
