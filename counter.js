@@ -26,21 +26,21 @@ export function setupCounter(element, text) {
       resultStyle = 'color: green; font-weight: bold;';  // Critical hit in green
 
     } else if (total >= 17) {
-      message += "(Tier 3)";
+      message += " (Tier 3)";
       resultStyle = 'color: blue; font-weight: bold;';  // Tier 3 in blue
 
     } else if (total >= 12) {
-      message += "(Tier 2)";
+      message += " (Tier 2)";
       resultStyle = 'color: purple; font-style: italic;';  // Tier 2 in orange italic
 
     } else {
-      message += "(Tier 1)";
+      message += " (Tier 1)";
       resultStyle = 'color: red; font-style: italic;';  // Tier 1 in red italic
 
     }
 
-    // Show the notification with additional flavor text
-    OBR.notification.show(`${text}: ${message}`);
+    // // Show the notification with additional flavor text
+    // OBR.notification.show(`${text}: ${message}`);
 
     // Create a new list item with styled text
     const newListItem = document.createElement('li');
