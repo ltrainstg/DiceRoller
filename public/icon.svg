@@ -1,3 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-  <circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="2" />
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <!-- Outer shape -->
+  <polygon points="50,5 85,20 95,50 85,80 50,95 15,80 5,50 15,20" fill="blue" stroke="black" stroke-width="2"/>
+
+  <!-- Numbers (1-10) positioned on each face -->
+  <text x="50" y="20" font-size="12" text-anchor="middle" fill="white">1</text>
+  <text x="75" y="30" font-size="12" text-anchor="middle" fill="white">2</text>
+  <text x="85" y="50" font-size="12" text-anchor="middle" fill="white">3</text>
+  <text x="75" y="70" font-size="12" text-anchor="middle" fill="white">4</text>
+  <text x="50" y="80" font-size="12" text-anchor="middle" fill="white">5</text>
+  <text x="25" y="70" font-size="12" text-anchor="middle" fill="white">6</text>
+  <text x="15" y="50" font-size="12" text-anchor="middle" fill="white">7</text>
+  <text x="25" y="30" font-size="12" text-anchor="middle" fill="white">8</text>
+  <text x="50" y="35" font-size="12" text-anchor="middle" fill="white">9</text>
+  <text x="50" y="50" font-size="12" text-anchor="middle" fill="white">10</text>
 </svg>
