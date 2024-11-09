@@ -1,5 +1,10 @@
 import './style.css'
 import { setupCounter } from './counter.js'
+import OBR from "@owlbear-rodeo/sdk";
+import { setupContextMenu } from './contextMenu.js';
+import { setupInitiativeList } from "./initiativeList";
+
+import { isImage } from "@owlbear-rodeo/sdk";
 
 
 document.querySelector('#app').innerHTML = `
@@ -37,6 +42,9 @@ document.querySelector('#app').innerHTML = `
       <!-- Roll results will be appended here -->
     </ul>
   </div>
+
+  </div>
+
 </div>
 `;
 
@@ -72,4 +80,5 @@ setupGlobalLock(globalLockButton);
 
 OBR.onReady(() => {
   setupContextMenu();
+  setupInitiativeList(document.querySelector("#initiative-list"));
 });
