@@ -18,11 +18,21 @@ const updateMapLayerMetadata = async (message) => {
       // Use the mutating callback function to update the item
       OBR.scene.items.updateItems(mapLayerItem, (items) => {
         for (let item of items) {
-          // Modify the metadata using the callback pattern
-          item.metadata[`${ID}/metadata`] = {
-            message: message, // Set the new message
-            lastUpdated: new Date().toISOString(), // Add a timestamp
-          };
+          let metadata = item.metadata[`${ID}/metadata`];
+          if (!item.metadata[`${ID}/metadata`]) {
+            item.metadata[`${ID}/metadata`] = {};
+          }
+
+          // Check if message is an array, initialize if not
+          if (!Array.isArray(item.metadata[`${ID}/metadata`].message)) {
+            item.metadata[`${ID}/metadata`].message = [];
+          }
+
+                    // Add the new message to the message array
+                    item.metadata[`${ID}/metadata`].message.push({
+                      text: message,
+                      timestamp: new Date().toISOString(), // Add a timestamp for each message
+                    });
         }
       });
 
@@ -100,29 +110,43 @@ export function setupCounter(element, text) {
 
   };
 
- async function updateRollList() {
-  // Get data from metadata
-  // 
-  let mapLayerItem = await OBR.scene.items.getItems(
-    (item) => item.layer === "MAP" && isImage(item)
-  );
-  console.log(mapLayerItem)
-  console.log(mapLayerItem[[0]]['metadata']['LD_Tracker/metadata']['message'])
-  // console.log(mapLayerItem)
-  const newListItem = document.createElement('li');
-  newListItem.innerHTML = mapLayerItem[[0]]['metadata']['LD_Tracker/metadata']['message']
-  const rollsList = document.getElementById('rolls-list');  // Target the roll list
-    // Append the new item to the list
-    rollsList.appendChild(newListItem);
-  // console.log(rollsList.childElementCount)
-  // console.log(rollsList.childElementCount > 1)
-    // If the list has more than 5 items, remove the oldest one
-    if (rollsList.childElementCount > 1) {
-      rollsList.removeChild(rollsList.firstChild);
-      // console.log(rollsList.childElementCount)
-      // console.log(rollsList.childElementCount > 1)
+  async function updateRollList() {
+    try {
+      // Retrieve the item from the "MAP" layer
+      let mapLayerItem = await OBR.scene.items.getItems(
+        (item) => item.layer === "MAP" && isImage(item)
+      );
+  
+      if (mapLayerItem.length > 0) {
+        // Access the message array from the item's metadata
+        const messages = mapLayerItem[0]?.metadata?.['LD_Tracker/metadata']?.message;
+  
+        // Check if messages is an array
+        if (Array.isArray(messages)) {
+          // Get the last 5 messages
+          const lastFiveMessages = messages.slice(-5);
+  
+          // Target the rolls-list element in the DOM
+          const rollsList = document.getElementById('rolls-list');
+  
+          // Clear existing list items
+          rollsList.innerHTML = '';
+  
+          // Append each message as a new <li> element
+          lastFiveMessages.forEach((msg) => {
+            const newListItem = document.createElement('li');
+            newListItem.innerHTML = `${msg.text}`;
+            rollsList.appendChild(newListItem);
+          });
+        } else {
+          console.log("No messages found in metadata.");
+        }
+      } else {
+        console.log("No item found on the 'MAP' layer.");
+      }
+    } catch (error) {
+      console.error("Error updating roll list:", error);
     }
-
   }
 
 
