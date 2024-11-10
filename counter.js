@@ -36,7 +36,7 @@ const updateMapLayerMetadata = async (message) => {
         }
       });
 
-      console.log("Map layer metadata updated successfully!");
+      console.log("Map layer metadata updated successfully! _test");
     } else {
       console.log("No item found on the 'MAP' layer.");
     }
