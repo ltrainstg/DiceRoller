@@ -1,8 +1,8 @@
 import './style.css'
-import { setupCounter } from './counter.js'
+import { setupCounter, setupInitiativeList } from './counter.js'
 import OBR from "@owlbear-rodeo/sdk";
 
-// import { setupInitiativeList } from "./initiativeList";
+import { setupInitiativeList } from "./counter.js";
 
 
 
@@ -41,7 +41,11 @@ document.querySelector('#app').innerHTML = `
       <!-- Roll results will be appended here -->
     </ul>
   </div>
-
+  <div>
+    <ul id="initiative-list">
+      <!-- Roll results will be appended here -->
+    </ul>
+  </div>
   </div>
 
 </div>
@@ -79,5 +83,5 @@ setupGlobalLock(globalLockButton);
 
 OBR.onReady(() => {
   // setupContextMenu();
-  // setupInitiativeList(document.querySelector("#initiative-list"));
+  setupInitiativeList(document.querySelector("#initiative-list"));
 });

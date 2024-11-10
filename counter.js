@@ -96,7 +96,7 @@ export function setupCounter(element, text) {
     
     updateMapLayerMetadata(`<span style="${resultStyle}">${message}</span>`)
     updateRollList()
-
+    setupInitiativeList('element')
     // const newListItem = document.createElement('li');
     // newListItem.innerHTML = `<span style="${resultStyle}">${message}</span>`;
     
@@ -211,15 +211,43 @@ export function setupCounter(element, text) {
   // element.addEventListener("click", () => updateMapLayerMetadata("This is a new map message"));
   // element.addEventListener("click", () => updateMetadata("Custom message goes here"));
   const items = OBR.scene.getItems
-  // console.log(items)
-  OBR.scene.items.onChange(updateRollList);
-  // Set up the event listener with a wrapper function that passes the items
+  // console.log(items)  // Set up the event listener with a wrapper function that passes the items
   element.addEventListener("click", () => setCounter(items));
 
   
 }
 
-
+export function setupInitiativeList(element) {
+  console.log('setupInitiativeList')
+  const renderList = (items) => {
+    // Get the name and initiative of any item with
+    // our initiative metadata
+    const initiativeItems = [];
+    for (const item of items) {
+        console.log(item)
+      const metadata = item.metadata[`${ID}/metadata`];
+      if (metadata) {
+        initiativeItems.push({
+          initiative: metadata.initiative,
+          name: item.name,
+        });
+      }
+    }
+  //   // Sort so the highest initiative value is on top
+  //   const sortedItems = initiativeItems.sort(
+  //     (a, b) => parseFloat(b.initiative) - parseFloat(a.initiative)
+  //   );
+  //   // Create new list nodes for each initiative item
+  //   const nodes = [];
+  //   for (const initiativeItem of sortedItems) {
+  //     const node = document.createElement("li");
+  //     node.innerHTML = `${initiativeItem.name} (${initiativeItem.initiative})`;
+  //     nodes.push(node);
+  //   }
+  //   element.replaceChildren(...nodes);
+  };
+  OBR.scene.items.onChange(renderList);
+}
 
 
 
