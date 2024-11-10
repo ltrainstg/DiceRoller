@@ -4,13 +4,14 @@ import { isImage } from "@owlbear-rodeo/sdk";
 
 const updateMapLayerMetadata = async (message) => {
   try {
+    console.log(message)
     // Retrieve all items in the scene
     let mapLayerItem = await OBR.scene.items.getItems(
       (item) => item.layer === "MAP" && isImage(item)
     );
 
     // Find the item that belongs to the "MAP" layer
-    // console.log(mapLayerItem[0])
+    console.log(mapLayerItem[0])
     // mapLayerItem = mapLayerItem[0]
 
     if (mapLayerItem) {
@@ -36,7 +37,7 @@ const updateMapLayerMetadata = async (message) => {
 
 
 export function setupCounter(element, text) {
-  const rollsList = document.getElementById('rolls-list');  // Target the roll list
+
   const inputElement = element.nextElementSibling;
 
   // Set the initial text for the button
@@ -82,47 +83,47 @@ export function setupCounter(element, text) {
     // OBR.notification.show(`${text}: ${message}`);
 
     // Create a new list item with styled text
-    const newListItem = document.createElement('li');
-    newListItem.innerHTML = `<span style="${resultStyle}">${message}</span>`;
     
-    // Append the new item to the list
-    rollsList.appendChild(newListItem);
+    updateMapLayerMetadata(`<span style="${resultStyle}">${message}</span>`)
+    updateRollList()
 
-    // If the list has more than 5 items, remove the oldest one
-    if (rollsList.childElementCount > 2) {
-      rollsList.removeChild(rollsList.firstChild);
-    }
+    // const newListItem = document.createElement('li');
+    // newListItem.innerHTML = `<span style="${resultStyle}">${message}</span>`;
+    
+    // // Append the new item to the list
+    // rollsList.appendChild(newListItem);
 
-
-    // const initiativeItems = [];
-    // for (const item of items) {
-    //   console.log(item)
-    //   // const metadata = item.metadata[`${ID}/metadata`];
-    //   // if (metadata) {
-    //   //   initiativeItems.push({
-    //   //     initiative: metadata.initiative,
-    //   //     name: item.name,
-    //   //   });
-    //   // }
+    // // If the list has more than 5 items, remove the oldest one
+    // if (rollsList.childElementCount > 2) {
+    //   rollsList.removeChild(rollsList.firstChild);
     // }
-    // // Sort so the highest initiative value is on top
-    // const sortedItems = initiativeItems.sort(
-    //   (a, b) => parseFloat(b.initiative) - parseFloat(a.initiative)
-    // );
-    // // Create new list nodes for each initiative item
-    // const nodes = [];
-    // for (const initiativeItem of sortedItems) {
-    //   const node = document.createElement("li");
-    //   node.innerHTML = `${initiativeItem.name} (${initiativeItem.initiative})`;
-    //   // node.innerHTML = `<span style="${resultStyle}">${text}: ${message}</span>`;
-    //   nodes.push(node);
-    // }
-    // element.replaceChildren(...nodes);
-
-
 
   };
 
+ async function updateRollList() {
+  // Get data from metadata
+  // 
+  let mapLayerItem = await OBR.scene.items.getItems(
+    (item) => item.layer === "MAP" && isImage(item)
+  );
+  console.log(mapLayerItem)
+  console.log(mapLayerItem[[0]]['metadata']['LD_Tracker/metadata']['message'])
+  // console.log(mapLayerItem)
+  const newListItem = document.createElement('li');
+  newListItem.innerHTML = mapLayerItem[[0]]['metadata']['LD_Tracker/metadata']['message']
+  const rollsList = document.getElementById('rolls-list');  // Target the roll list
+    // Append the new item to the list
+    rollsList.appendChild(newListItem);
+  // console.log(rollsList.childElementCount)
+  // console.log(rollsList.childElementCount > 1)
+    // If the list has more than 5 items, remove the oldest one
+    if (rollsList.childElementCount > 1) {
+      rollsList.removeChild(rollsList.firstChild);
+      // console.log(rollsList.childElementCount)
+      // console.log(rollsList.childElementCount > 1)
+    }
+
+  }
 
 
   const setCounter1 = async () => {
@@ -130,7 +131,6 @@ export function setupCounter(element, text) {
     const items = await OBR.scene.items.getItems();
     const message = Math.floor(Math.random() * 100);
     const player = await OBR.player.getName();
-    const playerId = player.id;
     console.log(player)
 
     updateMapLayerMetadata("This is a new map message")

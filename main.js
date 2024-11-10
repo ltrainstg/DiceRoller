@@ -1,10 +1,9 @@
 import './style.css'
 import { setupCounter } from './counter.js'
 import OBR from "@owlbear-rodeo/sdk";
-import { setupContextMenu } from './contextMenu.js';
-import { setupInitiativeList } from "./initiativeList";
 
-import { isImage } from "@owlbear-rodeo/sdk";
+// import { setupInitiativeList } from "./initiativeList";
+
 
 
 document.querySelector('#app').innerHTML = `
@@ -79,6 +78,6 @@ const globalLockButton = document.getElementById('globalLock');
 setupGlobalLock(globalLockButton);
 
 OBR.onReady(() => {
-  setupContextMenu();
-  setupInitiativeList(document.querySelector("#initiative-list"));
+  // setupContextMenu();
+  // setupInitiativeList(document.querySelector("#initiative-list"));
 });
