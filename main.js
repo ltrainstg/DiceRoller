@@ -70,6 +70,6 @@ function setupGlobalLock(lockButton) {
 const globalLockButton = document.getElementById('globalLock');
 setupGlobalLock(globalLockButton);
 
-OBR.onReady(() => {
-  setupContextMenu();
-});
+// OBR.onReady(() => {
+//   setupContextMenu();
+// });
