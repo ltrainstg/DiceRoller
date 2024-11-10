@@ -212,7 +212,7 @@ export function setupCounter(element, text) {
   // element.addEventListener("click", () => updateMetadata("Custom message goes here"));
   const items = OBR.scene.getItems
   // console.log(items)
-  
+  OBR.scene.items.onChange(updateRollList);
   // Set up the event listener with a wrapper function that passes the items
   element.addEventListener("click", () => setCounter(items));
 
